@@ -1,3 +1,4 @@
+import Link from "next/link"
 import { InferGetStaticPropsType } from 'next';
 import Head from 'next/head'
 // import styles from '../styles/Home.module.css'
@@ -55,11 +56,16 @@ export default function Home({ posts }: InferGetStaticPropsType<typeof getStatic
         <BlogTitle>
           {title}
         </BlogTitle>
+        <Link href="/about">
+          <a>About this blog</a>
+        </Link>
         <List>
           {posts.map((post) => (
-            <ListItem key={post.id}>
+            <Link key={post.id} href="/posts/[id]" as={`/posts/${post.id}`} passHref>
+            <ListItem>
               <PostTitle>{post.title}</PostTitle>
             </ListItem>
+            </Link>
           ))}
         </List>
       </Main>
